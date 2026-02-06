@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💖</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Poppins', cursive;
+    background: linear-gradient(135deg, #ffd6e8, #d6f0ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.container {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 520px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    color: #ff4f9a;
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.name {
+    font-size: 22px;
+    color: #555;
+    margin-bottom: 18px;
+}
+
+.stickers {
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    font-size: 18px;
+    border-radius: 35px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff7eb3, #ff4f9a);
+    color: white;
+    transition: 0.3s;
+}
+
+button:hover { transform: scale(1.05); }
+
+#noBtn {
+    background: linear-gradient(135deg, #999, #666);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.success { display: none; }
+
+.success h2 {
+    color: #ff4f9a;
+    font-size: 30px;
+}
+
+.success p {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.7;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating hearts generator -->
+<script>
+for (let i = 0; i < 25; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
+    document.body.appendChild(heart);
+}
+</script>
+
+<div class="container" id="page1">
+    <h1>Will you be my Valentine? 💖</h1>
+    <div class="name">Hey <b>SHAURYA</b> 😌</div>
+
+    <div class="stickers">💋 💕 🍫 🎀 💖 💝</div>
+
+    <button onclick="unlockLove()">Yes 💕</button>
+    <button onclick="unlockLove()">No other choice 😌</button>
+    <button onclick="unlockLove()">Option 1 / A (Yes) 😏</button>
+    <button onclick="unlockLove()">Absofuckinglutely YES 😍</button>
+
+    <button id="noBtn" onmouseover="runAway()">NO 🙄</button>
+</div>
+
+<div class="container success" id="page2">
+    <h2>🎉 Premium Subscription Unlocked 🎉</h2>
+    <div class="stickers">💋💋 💕 🎀 🍫 💖</div>
+
+    <p>
+        You have unlocked the <b>Premium Subscription</b> of:<br><br>
+        💗 Unlimited love<br>
+        🤗 Unlimited cuddles<br>
+        😘 Endless kisses<br>
+        😜 Cringe flirting<br>
+        😂 Loads of laughter<br>
+        😤 Peaky fights for a lifetime<br><br>
+        By yours most <b>beautiful, caring, loving, and super intelligent girlfriend</b> 💕
+    </p>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+function runAway() {
+    const x = Math.random() * 300 - 150;
+    const y = Math.random() * 300 - 150;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function confettiBlast() {
+    for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor =
+            ["#ff4f9a", "#ffd700", "#7ee8fa", "#ff9a9e"][Math.floor(Math.random()*4)];
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3000);
+    }
+}
+
+function unlockLove() {
+    confettiBlast();
+    document.getElementById("victoryMusic").play();
+    setTimeout(() => {
+        document.getElementById("page1").style.display = "none";
+        document.getElementById("page2").style.display = "block";
+    }, 800);
+}
+</script>
+
+</body>
+</html>
